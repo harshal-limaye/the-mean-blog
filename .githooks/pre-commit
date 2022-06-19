@@ -8,9 +8,9 @@ const types = [
 
 const message = process.title ? process.title.split('-m') : '';
 
+
 const contains = types.some(type => {
-  if (message.indexOf(type) !== -1) {
-    console.log(type, message);
+  if (message[1] && message[1].indexOf(type) !== -1) {
     return true;
   }
 
@@ -19,6 +19,6 @@ const contains = types.some(type => {
 
 if (!contains) {
     console.error("[Error]: Please select an appropriate commit type!");
-    console.log("For more information refer to contributing.md file in the root of the folder.");
+    console.log("git For more information refer to contributing.md file in the root of the folder.");
     process.exit(1);
 }
