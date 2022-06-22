@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import server from "./src/server";
-import { database } from "./helpers/database.helper";
+import { database } from "./src/helpers/database.helper";
 
 dotenv.config();
 
