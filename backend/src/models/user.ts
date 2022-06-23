@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export interface LoginDto {
   email: string;
@@ -36,4 +36,4 @@ const UserSchema: Schema = new Schema({
   },
 });
 
-export const User = mongoose.model("User", UserSchema);
+export const User = model("User", UserSchema);

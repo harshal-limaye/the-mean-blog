@@ -1,13 +1,9 @@
 #!/usr/bin/env node
 const cp = require('child_process');
 
-const types = [
-    "chore", "docs", "feat", "fix", "refactor", "style", "test"
-]
-
+const types = [ "chore", "docs", "feat", "fix", "refactor", "style", "test"];
 
 const message = process.title ? process.title.split('-m') : '';
-
 
 const contains = types.some(type => {
   if (message[1] && message[1].indexOf(type) !== -1) {
@@ -19,6 +15,6 @@ const contains = types.some(type => {
 
 if (!contains) {
     console.error("[Error]: Please select an appropriate commit type!");
-    console.log("git For more information refer to contributing.md file in the root of the folder.");
+    console.log("[Info]: git For more information refer to contributing.md file in the root of the folder.");
     process.exit(1);
 }
