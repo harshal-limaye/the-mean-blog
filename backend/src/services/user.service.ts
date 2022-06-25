@@ -1,9 +1,9 @@
-import { LoginDto, RegisterDto, User } from "../models/user";
+import { ILoginPayload, IRegisterPayload, User } from "../models/user";
 import bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 
 export class UserService {
-  static async register(data: RegisterDto): Promise<any> {
+  static async register(data: IRegisterPayload): Promise<any> {
     const { email, password, confirmPassword, firstName, lastName } = data;
     const existingUser = await User.findOne({ email });
 
@@ -23,7 +23,7 @@ export class UserService {
     });
   }
 
-  static async login(data: LoginDto): Promise<any> {
+  static async login(data: ILoginPayload): Promise<any> {
     const { email, password } = data;
     if (!email) throw Error("Please provide an email");
 

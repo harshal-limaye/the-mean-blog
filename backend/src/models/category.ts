@@ -1,19 +1,26 @@
-import { Schema, model, Model } from 'mongoose';
+import { Schema, model, Model, Types } from "mongoose";
 
-export interface CategoryDto {
-    name?: string;
-    description?: string;
+export interface ICategory {
+  name?: string;
+  description?: string;
+  posts: Types.ObjectId[];
 }
 
-const CategorySchema: Schema = new Schema({
-    name: {
-        type: String,
-        required: true
+const CategorySchema: Schema<ICategory> = new Schema<ICategory>({
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    default: "",
+  },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      default: [],
     },
-    description: {
-        type: String,
-        default: ''
-    }
+  ],
 });
 
-export const Category = model('Category', CategorySchema);
+export const Category: Model<ICategory> = model("Category", CategorySchema);

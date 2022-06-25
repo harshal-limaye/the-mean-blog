@@ -1,11 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document, Model, Types } from "mongoose";
 
-export interface LoginDto {
+export interface ILoginPayload {
   email: string;
   password: string;
 }
 
-export interface RegisterDto {
+export interface IRegisterPayload {
   firstName: string;
   lastName: string;
   email: string;
@@ -13,7 +13,15 @@ export interface RegisterDto {
   confirmPassword: string;
 }
 
-const UserSchema: Schema = new Schema({
+export interface IUser extends Document {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+  posts?: Types.ObjectId[];
+}
+
+const UserSchema: Schema<IUser> = new Schema<IUser>({
   firstName: {
     type: String,
     default: null,
@@ -34,6 +42,13 @@ const UserSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post",
+      default: []
+    },
+  ],
 });
 
-export const User = model("User", UserSchema);
+export const User: Model<IUser> = model("User", UserSchema);

@@ -1,7 +1,8 @@
-import { Category, CategoryDto } from "../models/category";
+import { Category, ICategory } from "../models/category";
+import err from "../helpers/error.helper";
 
 export class CategoryService {
-  static async getAll(): Promise<any[]> {
+  static async getAll(): Promise<ICategory[]> {
     try {
       return await Category.find({});
     } catch (error: any) {
@@ -9,7 +10,7 @@ export class CategoryService {
     }
   }
 
-  static async getById(id: string): Promise<any> {
+  static async getById(id: string): Promise<ICategory> {
     try {
       const category = await Category.findById(id);
       if (category) {
@@ -22,7 +23,7 @@ export class CategoryService {
     }
   }
 
-  static async create({ name, description }: CategoryDto): Promise<any> {
+  static async create({ name, description }: ICategory): Promise<ICategory> {
     try {
       const category = await Category.create({ name, description });
 
@@ -30,20 +31,23 @@ export class CategoryService {
         return category;
       }
 
-      throw Error("Something went wrong!");
+      throw Error(err.message);
     } catch (error: any) {
       throw Error(error);
     }
   }
 
-  static async update(data: CategoryDto, id: string): Promise<any> {
+  static async update(data: ICategory, id: string): Promise<ICategory> {
     if (!id) throw Error("Please provide a category id");
 
     try {
       const category = await Category.findById(id);
 
-      if (category) {
-        return await Category.findByIdAndUpdate(id, data, { new: true });
+      if (category !== null) {
+        const updated = await Category.findByIdAndUpdate(id, data, {
+          new: true,
+        });
+        if (updated) return updated;
       }
 
       throw Error("Category not found!");

@@ -1,7 +1,7 @@
-import { Response } from "express";
+import { Response, Request } from "express";
 import * as jwt from "jsonwebtoken";
 
-export function verifyToken(req: any, res: Response, next: () => void) {
+export function verifyToken(req: Request, res: Response, next: () => void) {
   const token = req.body.token || req.headers["x-access-token"];
 
   const chunks = req.originalUrl.split("/");
@@ -19,8 +19,8 @@ export function verifyToken(req: any, res: Response, next: () => void) {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.SECRET || "");
-    req.user = decoded;
+    const decoded: any = jwt.verify(token, process.env.SECRET || "");
+    req.app.locals.userId = decoded.userId;
   } catch (error) {
     return res.status(401).json({
       success: false,
