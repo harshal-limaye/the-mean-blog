@@ -4,6 +4,7 @@ import { verifyToken } from "./helpers/jwt.helper";
 import categoryRouter from "./routers/category.router";
 import postRouter from "./routers/post.router";
 import userRouter from "./routers/users.router";
+import optionRouter from "./routers/option.router";
 
 class Server {
   private _app: Express;
@@ -33,6 +34,7 @@ class Server {
     this.instance.use(`${this._endpoint}users`, userRouter);
     this.instance.use(`${this._endpoint}categories`, categoryRouter);
     this.instance.use(`${this._endpoint}posts`, postRouter);
+    this.instance.use(`${this._endpoint}options`, optionRouter);
   }
 }
 
