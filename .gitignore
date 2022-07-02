@@ -3,3 +3,6 @@
 /backend/.env
 /backend/dist
 /backend/coverage
+
+# Dashboard
+/dashboard/node_modules

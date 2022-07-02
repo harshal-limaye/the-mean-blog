@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import path from 'path';
 
 import { verifyToken } from "./helpers/jwt.helper";
 
@@ -7,6 +8,7 @@ import postRouter from "./routers/post.router";
 import userRouter from "./routers/users.router";
 import optionRouter from "./routers/option.router";
 import commentRouter from "./routers/comment.router";
+import metadataRouter from "./routers/metadata.router";
 
 class Server {
   private _app: Express;
@@ -26,6 +28,7 @@ class Server {
     this.instance.use(express.json());
     this.instance.use(express.urlencoded());
     this.instance.use(verifyToken);
+    // this.instance.use(express.static('/assets'));
   }
 
   initRoutes(): void {
@@ -38,6 +41,7 @@ class Server {
     this.instance.use(`${this._endpoint}posts`, postRouter);
     this.instance.use(`${this._endpoint}options`, optionRouter);
     this.instance.use(`${this._endpoint}comments`, commentRouter);
+    this.instance.use(`${this._endpoint}metadata`, metadataRouter)
   }
 }
 
