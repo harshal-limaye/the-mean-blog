@@ -13,6 +13,7 @@ export interface IPost extends Document {
   author: Types.ObjectId;
   categories: Types.ObjectId[];
   status?: Status;
+  comments?: Types.ObjectId[];
 }
 
 const PostSchema: Schema<IPost> = new Schema<IPost>({
@@ -42,11 +43,18 @@ const PostSchema: Schema<IPost> = new Schema<IPost>({
       ref: "Category",
     },
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment'
+    }
+  ]
 });
 
 const autoPopulate: any = function(this: any, next: any) {
   this.populate("author");
   this.populate("categories");
+  this.populate("comments");
   next();
 }
 

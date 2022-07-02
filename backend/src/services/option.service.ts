@@ -24,8 +24,9 @@ export class OptionService {
       let option = await Option.findOne({ key });
 
       if (option) {
-        option.update({ key, value });
-        option.save();
+        console.log(key, value);
+        await option.updateOne({ key, value });
+        await option.save();
       } else {
         option = await Option.create({ key, value });
       }
