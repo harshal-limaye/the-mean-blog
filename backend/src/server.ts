@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from "express";
-import path from 'path';
+import cors from 'cors';
 
 import { verifyToken } from "./helpers/jwt.helper";
 
@@ -9,6 +9,7 @@ import userRouter from "./routers/users.router";
 import optionRouter from "./routers/option.router";
 import commentRouter from "./routers/comment.router";
 import metadataRouter from "./routers/metadata.router";
+import initializationRouter from "./routers/initialization.router";
 
 class Server {
   private _app: Express;
@@ -25,10 +26,10 @@ class Server {
   }
 
   initMiddlewares(): void {
+    this.instance.use(cors())
     this.instance.use(express.json());
     this.instance.use(express.urlencoded());
     this.instance.use(verifyToken);
-    // this.instance.use(express.static('/assets'));
   }
 
   initRoutes(): void {
@@ -41,7 +42,8 @@ class Server {
     this.instance.use(`${this._endpoint}posts`, postRouter);
     this.instance.use(`${this._endpoint}options`, optionRouter);
     this.instance.use(`${this._endpoint}comments`, commentRouter);
-    this.instance.use(`${this._endpoint}metadata`, metadataRouter)
+    this.instance.use(`${this._endpoint}metadata`, metadataRouter);
+    this.instance.use(`${this._endpoint}initialization`, initializationRouter)
   }
 }
 

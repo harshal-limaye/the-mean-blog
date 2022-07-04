@@ -9,7 +9,7 @@ router.post("/auth/login", async (req: Request, res: Response) => {
 
     return res.status(200).json({ success: true, value: { token } });
   } catch (error: any) {
-    return res.status(200).json({ success: false, error: error.message });
+    return res.status(401).json({ success: false, error: error.message });
   }
 });
 
