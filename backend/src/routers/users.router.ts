@@ -5,9 +5,9 @@ const router = Router();
 
 router.post("/auth/login", async (req: Request, res: Response) => {
   try {
-    const token = await UserService.login(req.body);
+    const response = await UserService.login(req.body);
 
-    return res.status(200).json({ success: true, value: { token } });
+    return res.status(200).json({ success: true, value: response });
   } catch (error: any) {
     return res.status(401).json({ success: false, error: error.message });
   }

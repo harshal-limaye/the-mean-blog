@@ -42,6 +42,11 @@ export class UserService {
       throw Error("Authentication failed!");
     }
 
-    return token;
+    return {
+      token,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    };
   }
 }
