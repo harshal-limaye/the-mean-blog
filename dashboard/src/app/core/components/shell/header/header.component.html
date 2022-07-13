@@ -1,0 +1,26 @@
+<mat-toolbar fxFlex fxLayout="row" fxLayoutGap="10px" color="primary">
+  <mat-icon>rocket_launch</mat-icon>
+  <span>The Mean Blog</span>
+  <span fxFlex></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>person</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>web</mat-icon>
+    <span>Visit Website</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>key</mat-icon>
+    <span>Change Password</span>
+  </button>
+  <button (click)="logout()" mat-menu-item>
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

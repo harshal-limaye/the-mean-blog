@@ -11,4 +11,8 @@ export class SessionStorageService {
   get(key: string): any {
     return JSON.parse(sessionStorage.getItem(key) as any);
   }
+
+  delete(key: string): void {
+    sessionStorage.removeItem(key);
+  }
 }

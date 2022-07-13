@@ -9,14 +9,16 @@ import { SessionStorageService } from '@shared/services/session-storage.service'
 
 @Injectable()
 export class AuthEffects {
+  sessionKey = 'userInfo';
+
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromAction.login),
       switchMap((data) =>
         this.auth.login(data).pipe(
           map((response) => {
-            this.sessionStorage.set('userInfo', response.value);
-  
+            this.sessionStorage.set(this.sessionKey, response.value);
+
             return fromAction.success(response.value);
           }),
           catchError(() => of({ type: '[Login Screen] Failure' }))
@@ -30,6 +32,18 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(fromAction.success),
         tap(() => this.router.navigate(['/']))
+      ),
+    { dispatch: false }
+  );
+
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromAction.logout),
+        tap(() => {
+          this.sessionStorage.delete(this.sessionKey);
+          this.router.navigate(['/login']);
+        })
       ),
     { dispatch: false }
   );

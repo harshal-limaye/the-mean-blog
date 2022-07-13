@@ -20,6 +20,6 @@ export const success = createAction(
   props<LoginResponse>()
 );
 
-export const failure = createAction(
-  '[Login Screen] Failure'
-);
+export const failure = createAction('[Login Screen] Failure');
+
+export const logout = createAction('[Login Screen] Login');
