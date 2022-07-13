@@ -14,6 +14,7 @@ import { AuthState, selectLoginFailure } from '../store/auth.selector';
 export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
   onDestroy$: Subject<boolean> = new Subject<boolean>();
+  isSubmitted = false;
 
   get email(): AbstractControl | null {
     return this.form.get('email');
@@ -35,7 +36,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.store
       .pipe(takeUntil(this.onDestroy$), select(selectLoginFailure))
       .subscribe(
-        (flag) => flag && this.snackbar.open(err, 'Error!', { duration: 4000 })
+        (flag) => {
+          this.isSubmitted && flag && this.snackbar.open(err, 'Error!', { duration: 4000 });
+        }
+        
       );
 
     this.initializeForm();
@@ -55,6 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(): void {
     if (this.form.valid) {
+      this.isSubmitted = true;
       this.store.dispatch(login(this.form.value));
     }
   }
