@@ -1,5 +1,9 @@
 <mat-selection-list #shoes [multiple]="false">
-  <mat-list-option *ngFor="let menu of menus" [value]="menu">
-    {{ menu }}
+  <mat-list-option
+    (click)="navigateTo(menu)"
+    *ngFor="let menu of menus"
+    [value]="menu"
+  >
+    {{ menu.label }}
   </mat-list-option>
 </mat-selection-list>

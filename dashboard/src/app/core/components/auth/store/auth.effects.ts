@@ -36,17 +36,17 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  logout$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(fromAction.logout),
-        tap(() => {
-          this.sessionStorage.delete(this.sessionKey);
-          this.router.navigate(['/login']);
-        })
-      ),
-    { dispatch: false }
-  );
+  // logout$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(fromAction.logout),
+  //       tap(() => {
+  //         this.sessionStorage.delete(this.sessionKey);
+  //         this.router.navigate(['/login']);
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   constructor(
     private readonly actions$: Actions,

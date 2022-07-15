@@ -5,7 +5,9 @@ const router = Router();
 
 router.get("/:id", async (req: Request, res: Response) => {
   try {
-    return res.send(await MetadataService.get(req.params.id));
+    const columns = await MetadataService.get(req.params.id);
+
+    return res.send({ success: true, value: columns });
   } catch (error: any) {
     throw Error(error);
   }

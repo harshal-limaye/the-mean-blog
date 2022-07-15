@@ -24,6 +24,7 @@
     "@ngrx/effects": "^14.0.1",
     "@ngrx/schematics": "^14.0.1",
     "@ngrx/store": "^14.0.1",
+    "ag-grid-community": "^28.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

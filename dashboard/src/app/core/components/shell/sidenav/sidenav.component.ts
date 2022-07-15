@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IMenu, MENUS } from './sidenav.constants';
 
 @Component({
   selector: 'mean-sidenav',
@@ -6,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-  menus = ['Posts', 'Categories', 'Comments', 'Users'];
+  menus: IMenu[] = MENUS;
 
-  constructor() {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {}
+
+  navigateTo($event: IMenu): void {
+    this.router.navigate([$event.path])
+  }
 }
