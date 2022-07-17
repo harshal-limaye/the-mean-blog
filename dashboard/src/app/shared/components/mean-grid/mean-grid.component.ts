@@ -28,6 +28,7 @@ interface IAction {
 })
 export class MeanGridComponent implements OnInit {
   @Input() options: IOptions;
+  @Input() resizeToFit: boolean = true;
 
   @Output() onAction: EventEmitter<IAction> = new EventEmitter<IAction>();
   @Output() onGridReady: EventEmitter<any> = new EventEmitter();
@@ -66,7 +67,7 @@ export class MeanGridComponent implements OnInit {
     this.rowData$ = this.gridService.getRowData('categories').pipe(
       tap(() => {
         this.onGridDataLoadaed.emit(true);
-        this.options.resizeToFit && this.api.col.sizeColumnsToFit(this.height);
+        this.resizeToFit && this.api.col.sizeColumnsToFit(this.height);
       })
     );
   }

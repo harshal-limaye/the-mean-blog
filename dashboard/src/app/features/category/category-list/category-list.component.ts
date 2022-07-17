@@ -17,8 +17,7 @@ export class CategoryListComponent implements OnInit {
     this.options = {
       gridId: 'categoryGrid',
       metadata: 'categories',
-      endpoint: 'categories',
-      resizeToFit: true,
+      endpoint: 'categories'
     };
   }
 
