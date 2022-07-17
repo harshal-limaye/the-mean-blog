@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Create New Category</h1>
+<div mat-dialog-content>
+  <form class="category-form" [formGroup]="form" fxLayout="column">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error
+        *ngIf="form.get('name') && form.get('name')?.hasError('required')"
+      >
+        Please enter a category name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput [rows]="5" formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button
+    [disabled]="form.invalid"
+    mat-flat-button
+    color="primary"
+    mat-dialog-close
+  >
+    Save
+  </button>
+  <button mat-flat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</div>

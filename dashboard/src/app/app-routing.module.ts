@@ -2,14 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShellComponent } from '@core/components/shell/shell.component';
 import { LoginComponent } from '@core/components/auth/login/login.component';
+import { NotFoundComponent } from '@core/components/not-found/not-found.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: '',
     component: ShellComponent,
     children: [
       {
-        path: 'dashboard',
+        path: '',
         loadChildren: () =>
           import('@features/dashboard/dashboard.module').then(
             (m) => m.DashboardModule
@@ -24,14 +29,9 @@ const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+        component: NotFoundComponent
       },
     ],
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
   },
 ];
 

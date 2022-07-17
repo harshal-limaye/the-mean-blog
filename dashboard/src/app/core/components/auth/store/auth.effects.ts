@@ -31,22 +31,22 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(fromAction.success),
-        tap(() => this.router.navigate(['/']))
+        tap(() => this.router.navigate(['/dashboard']))
       ),
     { dispatch: false }
   );
 
-  // logout$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(fromAction.logout),
-  //       tap(() => {
-  //         this.sessionStorage.delete(this.sessionKey);
-  //         this.router.navigate(['/login']);
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(fromAction.logout),
+        tap(() => {
+          this.sessionStorage.delete(this.sessionKey);
+          this.router.navigate(['/login']);
+        })
+      ),
+    { dispatch: false }
+  );
 
   constructor(
     private readonly actions$: Actions,

@@ -12,9 +12,11 @@ import { ShellModule } from '@core/components/shell/shell.module';
 import { AuthModule } from '@core/components/auth/auth.module';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '@env/environment';
+import { NotFoundComponent } from '@core/components/not-found/not-found.component';
+import { InterceptorModule } from '@core/interceptors/interceptor.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     AppRoutingModule,
     AuthModule,
@@ -25,6 +27,7 @@ import { environment } from '@env/environment';
     ShellModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    InterceptorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { IOptions } from '@shared/components/mean-grid';
+import { CategoryFormComponent } from '../category-form/category-form.component';
 
 @Component({
   selector: 'mean-category-list',
@@ -9,12 +11,24 @@ import { IOptions } from '@shared/components/mean-grid';
 export class CategoryListComponent implements OnInit {
   options: IOptions;
 
-  constructor() {}
+  constructor(private readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.options = {
       gridId: 'categoryGrid',
       metadata: 'categories',
+      endpoint: 'categories',
+      resizeToFit: true,
     };
+  }
+
+  onAction($event: any): void {
+    switch ($event.action) {
+      case 'create':
+        this.dialog.open(CategoryFormComponent, {
+          disableClose: true,
+        });
+        break;
+    }
   }
 }

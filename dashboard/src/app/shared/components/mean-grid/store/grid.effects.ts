@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap } from 'rxjs';
-import { MeanGridService } from '../mean-grid.service';
+import { MeanGridService } from '../services/mean-grid.service';
 import { loadMetadata, metadataLoaded } from './grid.actions';
 
 @Injectable()

@@ -21,6 +21,11 @@ const CategorySchema: Schema<ICategory> = new Schema<ICategory>({
       default: [],
     },
   ],
-});
+}, { toJSON: { virtuals: true } });
+
+
+CategorySchema.virtual('postCount').get(function(this: any) {
+  return this.posts.length;
+})
 
 export const Category: Model<ICategory> = model("Category", CategorySchema);

@@ -5,7 +5,7 @@ export interface IMenu {
 
 export const MENUS: IMenu[] = [
   {
-    path: 'dashboard',
+    path: '',
     label: 'Dashboard',
   },
   {

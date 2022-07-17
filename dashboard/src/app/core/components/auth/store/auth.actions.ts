@@ -22,4 +22,4 @@ export const success = createAction(
 
 export const failure = createAction('[Login Screen] Failure');
 
-export const logout = createAction('[Login Screen] Login');
+export const logout = createAction('[Login Screen] Logout');

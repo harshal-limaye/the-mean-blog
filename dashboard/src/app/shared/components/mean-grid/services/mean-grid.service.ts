@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@shared/services/http.service';
-import { environment } from '@env/environment';
+import { Observable } from 'rxjs';
 
-import { map, Observable } from 'rxjs';
-import { IColumnDef } from './mean-grid.interface';
+import { HttpService } from '@shared/services/http.service';
+import { environment as env } from '@env/environment';
+import { IColumnDef } from '../mean-grid.interface';
 
 interface IResponse {
   type: string;
@@ -19,7 +19,11 @@ export class MeanGridService {
 
   getMetadata(metadataId: string): Observable<IColumnDef[]> {
     return this.http.get<IColumnDef[]>(
-      `${environment.apiUrl}/metadata/${metadataId}`
+      `${env.apiUrl}metadata/${metadataId}`
     );
+  }
+
+  getRowData(endpoint: string): Observable<any[]> {
+    return this.http.get(`${env.apiUrl}${endpoint}`);
   }
 }
